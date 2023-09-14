@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "inpainting"
-version = "0.0.2"
+version = "0.0.3"
 description = "TODO."
 authors = [
     "Florian Kofler <florian.kofler@tum.de>",
@@ -9,11 +9,11 @@ authors = [
 license = "AGPL-3.0"
 
 [tool.poetry.dependencies]
-torchmetrics = "^1.1.2"
-python = "^3.10"
-nibabel = ">3.0"
-numpy = "^1.25"
-torch = "^2.0.1"
+torchmetrics = ">=1.1.2"
+python = ">=3.10"
+nibabel = ">=3.0"
+numpy = ">=1.25"
+torch = ">=2.0.1"
 # tifffile = ">2023.8.25"
 # path = "^16.7.1"
 # Pillow = "^10.0.0"
