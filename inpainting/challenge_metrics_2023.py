@@ -101,8 +101,6 @@ def _mean_squared_error(
     mse = MeanSquaredError(
         squared=squared,
     )
-    print(f"prediction: {prediction.shape}")
-    print(f"target: {target.shape}")
 
     return mse(preds=prediction, target=target)
 
