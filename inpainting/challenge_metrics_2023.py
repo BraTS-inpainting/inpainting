@@ -174,6 +174,45 @@ def _mean_absolute_error(
 # the problem_type == "synthesis" branch
 
 
+def _normalize_with_percentiles(
+    input_tensor,
+    normalization_tensor=None,
+    p_min=0.5,
+    p_max=99.5,
+    strictly_positive=True,
+):
+    """Normalizes a tensor based on percentiles. Clips values below and above the percentile.
+    Percentiles for normalization can come from another tensor.
+
+    Args:
+        input_tensor (torch.Tensor): Tensor to be normalized based on the data from the normalization_tensor.
+            If normalization_tensor is None, the percentiles from this tensor will be used.
+        normalization_tensor (torch.Tensor, optional): The tensor used for obtaining the percentiles.
+        p_min (float, optional): Lower end percentile. Defaults to 0.5.
+        p_max (float, optional): Upper end percentile. Defaults to 99.5.
+        strictlyPositive (bool, optional): Ensures that really all values are above 0 before normalization. Defaults to True.
+
+    Returns:
+        torch.Tensor: The input_tensor normalized based on the percentiles of the reference tensor.
+    """
+    normalization_tensor = (
+        input_tensor if normalization_tensor is None else normalization_tensor
+    )
+    v_min, v_max = np.percentile(
+        normalization_tensor, [p_min, p_max]
+    )  # get p_min percentile and p_max percentile
+
+    # set lower bound to be 0 if strictlyPositive is enabled
+    v_min = max(v_min, 0.0) if strictly_positive else v_min
+    output_tensor = np.clip(
+        input_tensor, v_min, v_max
+    )  # clip values to percentiles from reference_tensor
+    output_tensor = (output_tensor - v_min) / (
+        v_max - v_min
+    )  # normalizes values to [0;1]
+    return output_tensor
+
+
 def generate_metrics(
     prediction: torch.Tensor,
     target: torch.Tensor,
@@ -193,44 +232,6 @@ def generate_metrics(
 
     """
 
-    def __percentile_clip(
-        input_tensor,
-        normalization_tensor=None,
-        p_min=0.5,
-        p_max=99.5,
-        strictly_positive=True,
-    ):
-        """Normalizes a tensor based on percentiles. Clips values below and above the percentile.
-        Percentiles for normalization can come from another tensor.
-
-        Args:
-            input_tensor (torch.Tensor): Tensor to be normalized based on the data from the normalization_tensor.
-                If normalization_tensor is None, the percentiles from this tensor will be used.
-            normalization_tensor (torch.Tensor, optional): The tensor used for obtaining the percentiles.
-            p_min (float, optional): Lower end percentile. Defaults to 0.5.
-            p_max (float, optional): Upper end percentile. Defaults to 99.5.
-            strictlyPositive (bool, optional): Ensures that really all values are above 0 before normalization. Defaults to True.
-
-        Returns:
-            torch.Tensor: The input_tensor normalized based on the percentiles of the reference tensor.
-        """
-        normalization_tensor = (
-            input_tensor if normalization_tensor is None else normalization_tensor
-        )
-        v_min, v_max = np.percentile(
-            normalization_tensor, [p_min, p_max]
-        )  # get p_min percentile and p_max percentile
-
-        # set lower bound to be 0 if strictlyPositive is enabled
-        v_min = max(v_min, 0.0) if strictly_positive else v_min
-        output_tensor = np.clip(
-            input_tensor, v_min, v_max
-        )  # clip values to percentiles from reference_tensor
-        output_tensor = (output_tensor - v_min) / (
-            v_max - v_min
-        )  # normalizes values to [0;1]
-        return output_tensor
-
     # Get Infill region (we really are only interested in the infill region)
 
     output_infill = (prediction * mask).float()
@@ -238,14 +239,14 @@ def generate_metrics(
 
     # Normalize to [0;1] based on GT (otherwise MSE will depend on the image intensity range)
     # use all the tissue that is not masked for normalization
-    gt_image_infill = __percentile_clip(
+    gt_image_infill = _normalize_with_percentiles(
         gt_image_infill,
         normalization_tensor=normalization_tensor,
         p_min=0.5,
         p_max=99.5,
         strictly_positive=True,
     )
-    output_infill = __percentile_clip(
+    output_infill = _normalize_with_percentiles(
         output_infill,
         normalization_tensor=normalization_tensor,
         p_min=0.5,
