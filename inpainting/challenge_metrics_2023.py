@@ -13,6 +13,15 @@ import numpy as np
 
 import nibabel as nib
 
+# these dependencies were used for computing the 2023 challenge metrics
+# [tool.poetry.dependencies]
+# torchmetrics = ">=1.1.2"
+# python = ">=3.10"
+# nibabel = ">=3.0"
+# numpy = ">=1.25"
+# torch = ">=2.0.1"
+
+
 # def calculate_rmse(gt, pred):
 #     gt_tensor = torch.tensor(gt)
 #     pred_tensor = torch.tensor(pred)
