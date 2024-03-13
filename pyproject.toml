@@ -1,12 +1,15 @@
 [tool.poetry]
 name = "inpainting"
-version = "0.0.5"
-description = "TODO."
+version = "0.0.6"
+description ="Official package to compute metrics for the BraTS inpainting challenge."
+readme = "README.md"
 authors = [
     "Florian Kofler <florian.kofler@tum.de>",
     "Felix Steinbauer <felix.steinbauer@tum.de>",
 ]
 license = "AGPL-3.0"
+
+
 
 [tool.poetry.dependencies]
 torchmetrics = ">=1.1.2"
