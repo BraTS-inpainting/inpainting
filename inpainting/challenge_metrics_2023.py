@@ -325,3 +325,30 @@ def generate_metrics(
     ).item()
 
     return output
+
+
+def compute_image_quality_metrics(
+    prediction: str,
+    healthy_mask: str,
+    reference_t1: str,
+    voided_t1: str,
+) -> dict:
+    print("computing metrics!")
+    print("prediction:", prediction)
+    print("healthy_mask:", healthy_mask)
+    print("reference_t1:", reference_t1)
+    print("voided_t1:", voided_t1)
+
+    prediction_data = read_nifti_to_tensor(prediction)
+    healthy_mask_data = read_nifti_to_tensor(healthy_mask).bool()
+    reference_t1_data = read_nifti_to_tensor(reference_t1)
+    voided_t1_data = read_nifti_to_tensor(voided_t1)
+
+    metrics = generate_metrics(
+        prediction=prediction_data,
+        target=reference_t1_data,
+        normalization_tensor=voided_t1_data,
+        mask=healthy_mask_data,
+    )
+
+    return metrics
