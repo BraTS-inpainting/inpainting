@@ -1,15 +1,31 @@
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+
 [tool.poetry]
 name = "inpainting"
-version = "0.0.6"
+version = "0.0.0"               # will be overwritten by poetry-dynamic-versioning but needs to be set
 description ="Official package to compute metrics for the BraTS inpainting challenge."
-readme = "README.md"
-authors = [
-    "Florian Kofler <florian.kofler@tum.de>",
-    "Felix Steinbauer <felix.steinbauer@tum.de>",
-]
 license = "AGPL-3.0"
 
+authors = [
+  "Florian Kofler <florian.kofler@tum.de>",
+  "Isra Mekki <isra.mekki@helmholtz-muenchen.de>",
+  "Marcel Rosier <marcel.rosier@tum.de>",
+]
 
+maintainers = [
+  "Florian Kofler <florian.kofler@tum.de>",
+  "Isra Mekki <isra.mekki@helmholtz-muenchen.de>",
+  "Marcel Rosier <marcel.rosier@tum.de>",
+]
+
+readme = "README.md"
+repository = "https://github.com/BrainLesion/preprocessing"
+#documentation = ""
 
 [tool.poetry.dependencies]
 torchmetrics = ">=1.1.2"
