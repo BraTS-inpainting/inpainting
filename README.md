@@ -1,5 +1,5 @@
 # inpainting
-Official package to compute metrics for the (BraTS inpainting challenge)[https://twitter.com/BraTS_inpaint].
+Official package to compute metrics for the [BraTS inpainting challenge](https://twitter.com/BraTS_inpaint).
 
 ## Usage
 ```
@@ -36,7 +36,7 @@ def compute_image_quality_metrics(
 
 
 ## Citation
-Please cite our (manuscrip)[https://arxiv.org/pdf/2305.08992.pdf] when using the package:
+Please cite our [manuscript](https://arxiv.org/pdf/2305.08992.pdf) when using the package:
 ```
 @misc{kofler2023brain,
       title={The Brain Tumor Segmentation (BraTS) Challenge 2023: Local Synthesis of Healthy Brain Tissue via Inpainting}, 
