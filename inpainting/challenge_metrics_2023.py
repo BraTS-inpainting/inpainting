@@ -1,17 +1,15 @@
 ### COPIED FROM https://github.com/mlcommons/GaNDLF/blob/master/GANDLF/utils/tensor.py
-import torch
-import numpy as np
-from torchmetrics.image import StructuralSimilarityIndexMeasure, PeakSignalNoiseRatio
-from torchmetrics.regression import (
-    MeanSquaredError,
-    MeanSquaredLogError,
-    MeanAbsoluteError,
-)
-
 import sys
-import numpy as np
 
 import nibabel as nib
+import numpy as np
+import torch
+from torchmetrics.image import PeakSignalNoiseRatio, StructuralSimilarityIndexMeasure
+from torchmetrics.regression import (
+    MeanAbsoluteError,
+    MeanSquaredError,
+    MeanSquaredLogError,
+)
 
 # these dependencies were used for computing the 2023 challenge metrics
 # [tool.poetry.dependencies]
