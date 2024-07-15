@@ -24,7 +24,7 @@ maintainers = [
 ]
 
 readme = "README.md"
-repository = "https://github.com/BrainLesion/preprocessing"
+repository = "https://github.com/BrainLesion/inpainting"
 #documentation = ""
 
 [tool.poetry.dependencies]
