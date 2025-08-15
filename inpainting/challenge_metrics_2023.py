@@ -128,22 +128,16 @@ def _peak_signal_noise_ratio(
         epsilon (float, optional): If not None, this epsilon is added to the denominator of the fraction to avoid infinity as output. Defaults to None.
     """
 
+    # Calculate data_range from data it not given
+    if data_range == None:
+        data_range = (torch.min(target), torch.max(target))
+
     if epsilon == None:
-        psnr = (
-            PeakSignalNoiseRatio()
-            if data_range == None
-            else PeakSignalNoiseRatio(data_range=data_range[1] - data_range[0])
-        )
+        psnr = PeakSignalNoiseRatio(data_range=data_range)
         return psnr(preds=prediction, target=target)
     else:  # implementation of PSNR that does not give 'inf'/'nan' when 'mse==0'
         mse = _mean_squared_error(target=target, prediction=prediction)
-        if data_range == None:  # compute data_range like torchmetrics if not given
-            min_v = (
-                0 if torch.min(target) > 0 else torch.min(target)
-            )  # look at this line
-            max_v = torch.max(target)
-        else:
-            min_v, max_v = data_range
+        min_v, max_v = data_range
         return 10.0 * torch.log10(((max_v - min_v) ** 2) / (mse + epsilon))
 
 
