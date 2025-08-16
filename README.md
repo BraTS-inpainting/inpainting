@@ -1,5 +1,5 @@
 # inpainting
-Official package to compute metrics for the [BraTS inpainting challenge](https://twitter.com/BraTS_inpaint).
+Official package to compute metrics for the [BraTS inpainting challenge](https://x.com/BraTS_inpaint).
 
 ## Usage
 ```
