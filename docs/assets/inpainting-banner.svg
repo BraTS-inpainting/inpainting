@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-labelledby="title" aria-describedby="desc">
   <title id="title">Inpainting Banner</title>
   <desc id="desc">BraTS inpainting banner with gradient background and title text.</desc>
   <defs>
