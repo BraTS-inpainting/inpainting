@@ -1,5 +1,5 @@
 # inpainting
-<img width="3200" height="1800" alt="inpainting banner" src="https://github.com/user-attachments/assets/b5a57afe-11b3-4701-b47f-060cdbe21c73" />
+![inpainting banner](https://github.com/user-attachments/assets/b5a57afe-11b3-4701-b47f-060cdbe21c73)
 Official package to compute metrics for the [BraTS inpainting challenge](https://x.com/BraTS_inpaint).
 
 ## Usage
