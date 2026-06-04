@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">Inpainting Banner</title>
+  <desc id="desc">BraTS inpainting banner with gradient background and title text.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d7d8a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <text x="60" y="170" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700">
+    BraTS Inpainting
+  </text>
+</svg>

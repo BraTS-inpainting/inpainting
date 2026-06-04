@@ -1,5 +1,5 @@
 # inpainting
-![inpainting banner](https://github.com/user-attachments/assets/b5a57afe-11b3-4701-b47f-060cdbe21c73)
+![inpainting banner](docs/assets/inpainting-banner.svg)
 Official package to compute metrics for the [BraTS inpainting challenge](https://x.com/BraTS_inpaint).
 
 ## Usage
