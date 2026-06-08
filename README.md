@@ -1,4 +1,5 @@
 # inpainting
+![inpainting banner](docs/assets/inpainting-banner.png)
 Official package to compute metrics for the [BraTS inpainting challenge](https://x.com/BraTS_inpaint).
 
 ## Usage
