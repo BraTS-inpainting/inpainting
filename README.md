@@ -2,8 +2,17 @@
 ![inpainting banner](docs/assets/inpainting-banner.png)
 Official package to compute metrics for the [BraTS inpainting challenge](https://x.com/BraTS_inpaint).
 
-## Usage
+## Installation
+
+```bash
+pip install inpainting
 ```
+
+## Usage
+
+The package provides `generate_metrics` to evaluate inpainting quality, and `read_nifti_to_tensor` to load NIfTI images as tensors.
+
+```python
 from inpainting.challenge_metrics_2023 import generate_metrics, read_nifti_to_tensor
 
 
@@ -13,12 +22,6 @@ def compute_image_quality_metrics(
     reference_t1: str,
     voided_t1: str,
 ) -> dict:
-    print("computing metrics!")
-    print("prediction:", prediction)
-    print("healthy_mask:", healthy_mask)
-    print("reference_t1:", reference_t1)
-    print("voided_t1:", voided_t1)
-
     prediction_data = read_nifti_to_tensor(prediction)
     healthy_mask_data = read_nifti_to_tensor(healthy_mask).bool()
     reference_t1_data = read_nifti_to_tensor(reference_t1)
@@ -32,9 +35,23 @@ def compute_image_quality_metrics(
     )
 
     return metrics
-
 ```
 
+### Computed Metrics
+
+`generate_metrics` returns a dictionary containing the following image quality metrics, computed over the inpainted (masked) region after percentile-based normalization to [0, 1]:
+
+| Key | Description |
+|---|---|
+| `ssim` | Structural Similarity Index (SSIM) |
+| `mse` | Mean Squared Error |
+| `rmse` | Root Mean Squared Error |
+| `msle` | Mean Squared Logarithmic Error |
+| `mae` | Mean Absolute Error |
+| `psnr` | Peak Signal-to-Noise Ratio (data range derived from input) |
+| `psnr_eps` | PSNR with epsilon for numerical stability |
+| `psnr_01` | PSNR with fixed data range [0, 1] |
+| `psnr_01_eps` | PSNR with fixed data range [0, 1] and epsilon |
 
 ## Citation
 Please cite our [manuscript](https://arxiv.org/pdf/2305.08992.pdf) when using the package:
@@ -48,11 +65,3 @@ Please cite our [manuscript](https://arxiv.org/pdf/2305.08992.pdf) when using th
       primaryClass={eess.IV}
 }
 ```
-
-
-
-<!-- ## install dependencies
-```
-poetry export -f requirements.txt > requirements.txt
-pip install -r  requirements.txt
-``` -->
