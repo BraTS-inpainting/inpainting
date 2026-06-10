@@ -8,14 +8,6 @@ Official package to compute metrics for the [BraTS inpainting challenge](https:/
 pip install inpainting
 ```
 
-### Requirements
-
-- Python >= 3.10
-- torch >= 2.0.1
-- torchmetrics >= 1.1.2
-- nibabel >= 3.0
-- numpy >= 1.25
-
 ## Usage
 
 The package provides `generate_metrics` to evaluate inpainting quality, and `read_nifti_to_tensor` to load NIfTI images as tensors.
